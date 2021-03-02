@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"watch": true,
+		"moduleResolution": "node",
+		"outDir": "build",
+		"resolveJsonModule": true
+	},
+	"include": ["src", "@types"]
+}
