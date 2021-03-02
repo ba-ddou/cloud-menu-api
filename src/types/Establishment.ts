@@ -1,9 +1,9 @@
 import { gql } from 'apollo-server'
-import { MenuSection } from './MenuSection'
-import { MenuItem } from './MenuItem'
+import { MenuSection, MenuSectionDocument } from './MenuSection'
+import { MenuItemDocument } from './MenuItem'
 import { MongoDBMenuItemService } from '../services/MenuItem'
 
-type EstablishmentDocument = {
+export type EstablishmentDocument = {
 	id: string
 	name: string
 	_type: string
@@ -64,8 +64,8 @@ export const Establishment = gql`
 export const EstablishmentResolvers = {
 	Establishment: {
 		menu: async (parent: EstablishmentDocument) => {
-			let menuItems: MenuItem[] = await MongoDBMenuItemService.getEstablishmentMenuItems(parent.id);
-			let menu: MenuSection[] = parent.sections.map(section => ({
+			let menuItems: MenuItemDocument[] = await MongoDBMenuItemService.getEstablishmentMenuItems(parent.id);
+			let menu: MenuSectionDocument[] = parent.sections.map(section => ({
 				...section,
 				items: menuItems.filter(item => item.sectionId == section.id)
 			}))

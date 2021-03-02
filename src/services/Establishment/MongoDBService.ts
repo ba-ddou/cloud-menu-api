@@ -1,5 +1,6 @@
+import { EstablishmentDocument } from '../../types/Establishment'
 export default class MongoDBService {
-    getEstablishment(id: string) {
+    getEstablishment(id: string): Promise<EstablishmentDocument> {
         return {}
     }
 }

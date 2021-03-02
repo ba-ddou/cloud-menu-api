@@ -1,4 +1,4 @@
-import { MenuItem } from '../../@types/MenuItem'
+import { MenuItem } from '../../types/MenuItem'
 
 export default class MongoDBService {
     getMenuItem(id: string) {
