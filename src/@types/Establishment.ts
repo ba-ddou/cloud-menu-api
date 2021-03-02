@@ -26,9 +26,9 @@ type EstablishmentDocument = {
 		longitude: number
 	}
 	sections: {
-		_id: string
+		id: string
 		name: string
-	}
+	}[]
 	username: string
 	passwordHash: string
 
@@ -54,9 +54,9 @@ export const Establishment = gql`
 		city: string
 		address: string
         sections: {
-				_id: string
+				id: string
 				name: string
-		}
+		}[]
         menu: MenuSection[]
 }
 `
@@ -64,7 +64,12 @@ export const Establishment = gql`
 export const EstablishmentResolvers = {
 	Establishment: {
 		menu: async (parent: EstablishmentDocument) => {
-			// let menuItems = await MongoDBMenuItemService.getEstablishmentMenuItems(parent.id);
+			let menuItems: MenuItem[] = await MongoDBMenuItemService.getEstablishmentMenuItems(parent.id);
+			let menu: MenuSection[] = parent.sections.map(section => ({
+				...section,
+				items: menuItems.filter(item => item.sectionId == section.id)
+			}))
+			return menu;
 		}
 	}
 }
