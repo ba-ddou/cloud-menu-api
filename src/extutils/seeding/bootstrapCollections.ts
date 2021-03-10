@@ -24,7 +24,7 @@ async function run() {
                 menuItemsCollection = [...menuItemsCollection, ...menuItemDocuments];
             }
             writeFile(path.resolve(__dirname, `./collections/Establishment/${city}_establishments.json`), establishmentsCollection);
-            writeFile(path.resolve(__dirname, `./collections/MenuItem/${city}_menuItems.json`), establishmentsCollection);
+            writeFile(path.resolve(__dirname, `./collections/MenuItem/${city}_menuItems.json`), menuItemsCollection);
         }
 
     } catch (error) {
