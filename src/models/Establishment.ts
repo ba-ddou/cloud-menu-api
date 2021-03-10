@@ -46,7 +46,9 @@ const EstablishmentSchema = new Schema({
     collection: 'Establishment'
 });
 
-interface MongooseEstablishmentDocument extends Document, Omit<EstablishmentDocument, '_id'> { }
+interface MongooseEstablishmentDocument extends Document, Omit<EstablishmentDocument, '_id'> {
+    _id: EstablishmentDocument['_id']
+}
 
 const EstablishmentModel = model<MongooseEstablishmentDocument>('Establishment', EstablishmentSchema);
 

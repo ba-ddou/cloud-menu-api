@@ -11,7 +11,7 @@ import { MongoDBEstablishmentService } from './services/Establishment'
 
 const Query = gql`
     type Query {
-        establishment(id: String): [Establishment]
+        establishment(id: String): Establishment
     }
 `
 

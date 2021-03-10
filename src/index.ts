@@ -1,6 +1,8 @@
 import schema from './schema'
 import { ApolloServer } from 'apollo-server'
+import * as mongoose from 'mongoose'
 
+mongoose.connect('mongodb://localhost:27017/DigitalMenu', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const server = new ApolloServer({
     schema,
