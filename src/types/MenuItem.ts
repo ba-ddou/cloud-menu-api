@@ -15,14 +15,12 @@ export type MenuItemDocument = {
 
 export const MenuItem = gql`
     type MenuItem{
-        name: string
-        price: number
-        description: string
-        ingredients: string
-        thumbnail: {
-            uri: string
-        }
-        section: string
-        establishment: string
+        name: String
+        price: Float
+        description: String
+        ingredients: String
+        thumbnail: Image
+        section: String
+        establishment: String
     }
 `

@@ -35,29 +35,27 @@ export type EstablishmentDocument = {
 }
 
 export const Establishment = gql`
+	type Image{
+		uri: String
+	}
+	type Section{
+		id: String
+		name: String
+	}
     type Establishment{
-		_id: string
-		name: string
-		_type: string
-		description: string
-		banner:{
-			uri: string
-		}
-		thumbnail:{
-			uri: string
-		}
-		logo:{
-			uri: string
-		}
-        email: string
-		phone: string
-		city: string
-		address: string
-        sections: {
-				id: string
-				name: string
-		}[]
-        menu: MenuSection[]
+		_id: String
+		name: String
+		_type: String
+		description: String
+		banner: Image
+		thumbnail: Image
+		logo: Image
+        email: String
+		phone: String
+		city: String
+		address: String
+        sections: [Section]
+        menu: [MenuSection]
 }
 `
 
@@ -67,7 +65,7 @@ export const EstablishmentResolvers = {
 			let menuItems: MenuItemDocument[] = await MongoDBMenuItemService.getEstablishmentMenuItems(parent._id);
 			let menu: MenuSectionDocument[] = parent.sections.map(section => ({
 				...section,
-				items: menuItems.filter(item => item.sectionId == section.id)
+				items: menuItems.filter(item => item.section == section.id)
 			}))
 			return menu;
 		}

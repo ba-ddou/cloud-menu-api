@@ -11,13 +11,13 @@ import { MongoDBEstablishmentService } from './services/Establishment'
 
 const Query = gql`
     type Query {
-        Establishment(id: string): [Establishment]
+        establishment(id: String): [Establishment]
     }
 `
 
 const rootResolvers = {
     Query: {
-        Establishment: async (_, args: {
+        establishment: async (_, args: {
             id: string
         }) => {
             let establishment = await MongoDBEstablishmentService.getEstablishment(args.id);

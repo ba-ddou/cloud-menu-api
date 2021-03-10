@@ -10,8 +10,8 @@ export type MenuSectionDocument = {
 
 export const MenuSection = gql`
     type MenuSection{
-        id: string
-        name: string
-        items: MenuItem[]
+        id: String
+        name: String
+        items: [MenuItem]
     }
 `
