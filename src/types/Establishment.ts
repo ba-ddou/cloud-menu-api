@@ -64,7 +64,8 @@ export const EstablishmentResolvers = {
 		menu: async (parent: EstablishmentDocument) => {
 			let menuItems: MenuItemDocument[] = await MongoDBMenuItemService.getEstablishmentMenuItems(parent._id);
 			let menu: MenuSectionDocument[] = parent.sections.map(section => ({
-				...section,
+				id: section.id,
+				name: section.name,
 				items: menuItems.filter(item => item.section == section.id)
 			}))
 			return menu;
