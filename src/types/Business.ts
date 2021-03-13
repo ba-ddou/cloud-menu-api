@@ -6,7 +6,7 @@ import { MongoDBMenuItemService } from '../services/MenuItem'
 export type BusinessDocument = {
 	_id: string
 	name: string
-	_type: string
+	_type: "restaurant" | "coffeeShop" | "restaurantCoffeeShop" | "hotel"
 	description?: string
 	banner: {
 		uri: string
