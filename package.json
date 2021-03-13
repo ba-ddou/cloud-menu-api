@@ -1,5 +1,5 @@
 {
-  "name": "digitalMenuGqlApi",
+  "name": "cloud-menu-api",
   "version": "0.0.1",
   "main": "src/index.ts",
   "author": "abdelbassite badou",
