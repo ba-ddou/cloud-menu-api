@@ -1,38 +1,10 @@
 import { gql } from 'apollo-server'
 import { MenuSection, MenuSectionDocument } from './MenuSection'
-import { MenuItemDocument } from './MenuItem'
+import { MenuItem as MenuItemDocument } from 'cloud-menu-shared-libs/@types/MenuItem'
 import { MongoDBMenuItemService } from '../services/MenuItem'
+import { BusinessDocument } from 'cloud-menu-shared-libs/@types/Business'
 
-export type BusinessDocument = {
-	_id: string
-	name: string
-	_type: "restaurant" | "coffeeShop" | "restaurantCoffeeShop" | "hotel"
-	description?: string
-	banner: {
-		uri: string
-	}
-	thumbnail: {
-		uri: string
-	}
-	logo?: {
-		uri: string
-	}
-	email?: string
-	phone?: string
-	city: string
-	address: string
-	location?: {
-		latitude: number
-		longitude: number
-	}
-	sections: {
-		id: string
-		name: string
-	}[]
-	username?: string
-	passwordHash?: string
 
-}
 
 export const Business = gql`
 	type Image{

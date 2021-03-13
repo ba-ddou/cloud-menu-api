@@ -7,6 +7,7 @@
   "dependencies": {
     "@types/pify": "^5.0.0",
     "apollo-server": "^2.21.0",
+    "cloud-menu-shared-libs": "https://github.com/ba-ddou/cloud-menu-shared-libs",
     "graphql": "^15.5.0",
     "graphql-tools": "^7.0.4",
     "jsonfile": "^6.1.0",

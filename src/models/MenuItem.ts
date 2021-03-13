@@ -1,5 +1,5 @@
 import { Schema, Document, model } from 'mongoose';
-import { MenuItemDocument } from '../types/MenuItem'
+import { MenuItem as MenuItemDocument } from 'cloud-menu-shared-libs/@types/MenuItem'
 
 
 

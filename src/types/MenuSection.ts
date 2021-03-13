@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server'
-import { MenuItemDocument } from './MenuItem'
+import { MenuItem as MenuItemDocument } from 'cloud-menu-shared-libs/@types/MenuItem'
 
 export type MenuSectionDocument = {
     id: string

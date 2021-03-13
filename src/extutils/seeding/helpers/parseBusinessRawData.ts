@@ -1,5 +1,5 @@
-import { BusinessDocument } from '../../../types/Business'
-import { MenuItemDocument } from '../../../types/MenuItem'
+import { BusinessDocument } from 'cloud-menu-shared-libs/@types/Business'
+import { MenuItem as MenuItemDocument } from 'cloud-menu-shared-libs/@types//MenuItem'
 import { rawBusinessData, rawMenuItemData } from '../data/types'
 import { getAlphanumeric } from '../helpers/alphanumeric'
 
