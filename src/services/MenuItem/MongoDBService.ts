@@ -5,9 +5,9 @@ export default class MongoDBService {
         return {}
     }
 
-    async getEstablishmentMenuItems(establishment: string): Promise<MenuItemDocument[]> {
+    async getBusinessMenuItems(business: string): Promise<MenuItemDocument[]> {
         let documents = await MenuItemModel.find({
-            establishment
+            business
         });
         if (documents) return documents;
     }

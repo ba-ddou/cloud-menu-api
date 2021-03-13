@@ -9,7 +9,7 @@ export type MenuItemDocument = {
         uri: string
     }
     section: string
-    establishment: string
+    business: string
 }
 
 
@@ -21,6 +21,6 @@ export const MenuItem = gql`
         ingredients: String
         thumbnail: Image
         section: String
-        establishment: String
+        business: String
     }
 `

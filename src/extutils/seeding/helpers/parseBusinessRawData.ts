@@ -1,18 +1,18 @@
-import { EstablishmentDocument } from '../../../types/Establishment'
+import { BusinessDocument } from '../../../types/Business'
 import { MenuItemDocument } from '../../../types/MenuItem'
-import { rawEstablishmentData, rawMenuItemData } from '../data/types'
+import { rawBusinessData, rawMenuItemData } from '../data/types'
 import { getAlphanumeric } from '../helpers/alphanumeric'
 
 
 const alphanumeric = getAlphanumeric(8);
 
-export const parseEstablishmentRawData = (data: rawEstablishmentData, city: string): [EstablishmentDocument, MenuItemDocument[]] => {
+export const parseBusinessRawData = (data: rawBusinessData, city: string): [BusinessDocument, MenuItemDocument[]] => {
     let sectionNames: string[] = getDistinctMenuSections(data.menu);
     let sections = sectionNames.map(section => ({
         id: alphanumeric(),
         name: section
     }));
-    let establishmentId = alphanumeric();
+    let businessId = alphanumeric();
     let menu: MenuItemDocument[] = data.menu.filter(menuItem => menuItem.price && menuItem.name)
         .map(menuItem => ({
             name: menuItem.name,
@@ -23,12 +23,12 @@ export const parseEstablishmentRawData = (data: rawEstablishmentData, city: stri
                 uri: menuItem.img && menuItem.img.path ? menuItem.img.path : ''
             },
             section: sections.find((section) => section.name === menuItem.section).id,
-            establishment: establishmentId
+            business: businessId
         }));
 
     return [
         {
-            _id: establishmentId,
+            _id: businessId,
             _type: 'restaurant',
             address: data.address,
             banner: {
@@ -50,8 +50,8 @@ export const parseEstablishmentRawData = (data: rawEstablishmentData, city: stri
                 uri: ''
             },
             phone: '',
-            username: establishmentId,
-            passwordHash: establishmentId
+            username: businessId,
+            passwordHash: businessId
         },
         menu
     ]

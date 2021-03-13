@@ -1,35 +1,35 @@
-import { Establishment, EstablishmentResolvers, EstablishmentDocument } from './types/Establishment';
+import { Business, BusinessResolvers, BusinessDocument } from './types/Business';
 import { MenuItem } from './types/MenuItem'
 import { MenuSection } from './types/MenuSection'
 
 import { gql } from 'apollo-server'
 import { makeExecutableSchema } from 'graphql-tools'
 
-import { MongoDBEstablishmentService } from './services/Establishment'
+import { MongoDBBusinessService } from './services/Business'
 
 
 
 const Query = gql`
     type Query {
-        establishment(id: String): Establishment
+        business(id: String): Business
     }
 `
 
 const rootResolvers = {
     Query: {
-        establishment: async (_, args: {
+        business: async (_, args: {
             id: string
         }) => {
-            let establishment = await MongoDBEstablishmentService.getEstablishment(args.id);
-            return establishment;
+            let business = await MongoDBBusinessService.getBusiness(args.id);
+            return business;
         }
     }
 }
 
 export default makeExecutableSchema({
-    typeDefs: [Query, Establishment, MenuItem, MenuSection],
+    typeDefs: [Query, Business, MenuItem, MenuSection],
     resolvers: {
         ...rootResolvers,
-        ...EstablishmentResolvers
+        ...BusinessResolvers
     }
 })

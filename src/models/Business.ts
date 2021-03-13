@@ -1,5 +1,5 @@
 import { Schema, Document, model } from 'mongoose';
-import { EstablishmentDocument } from '../types/Establishment'
+import { BusinessDocument } from '../types/Business'
 
 const sectionSchema = new Schema({
     id: {
@@ -8,7 +8,7 @@ const sectionSchema = new Schema({
     name: String,
 });
 
-const EstablishmentSchema = new Schema({
+const BusinessSchema = new Schema({
     _id: {
         type: String
     },
@@ -43,13 +43,13 @@ const EstablishmentSchema = new Schema({
     passwordHash: String
     ,
 }, {
-    collection: 'Establishment'
+    collection: 'Business'
 });
 
-interface MongooseEstablishmentDocument extends Document, Omit<EstablishmentDocument, '_id'> {
-    _id: EstablishmentDocument['_id']
+interface MongooseBusinessDocument extends Document, Omit<BusinessDocument, '_id'> {
+    _id: BusinessDocument['_id']
 }
 
-const EstablishmentModel = model<MongooseEstablishmentDocument>('Establishment', EstablishmentSchema);
+const BusinessModel = model<MongooseBusinessDocument>('Business', BusinessSchema);
 
-export default EstablishmentModel;
+export default BusinessModel;

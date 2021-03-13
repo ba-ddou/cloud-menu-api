@@ -1,4 +1,4 @@
-export interface rawEstablishmentData {
+export interface rawBusinessData {
     img: {
         path: string
     }

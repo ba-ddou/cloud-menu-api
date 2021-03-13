@@ -3,7 +3,7 @@ import { MenuSection, MenuSectionDocument } from './MenuSection'
 import { MenuItemDocument } from './MenuItem'
 import { MongoDBMenuItemService } from '../services/MenuItem'
 
-export type EstablishmentDocument = {
+export type BusinessDocument = {
 	_id: string
 	name: string
 	_type: string
@@ -34,7 +34,7 @@ export type EstablishmentDocument = {
 
 }
 
-export const Establishment = gql`
+export const Business = gql`
 	type Image{
 		uri: String
 	}
@@ -42,7 +42,7 @@ export const Establishment = gql`
 		id: String
 		name: String
 	}
-    type Establishment{
+    type Business{
 		_id: String
 		name: String
 		_type: String
@@ -59,10 +59,10 @@ export const Establishment = gql`
 }
 `
 
-export const EstablishmentResolvers = {
-	Establishment: {
-		menu: async (parent: EstablishmentDocument) => {
-			let menuItems: MenuItemDocument[] = await MongoDBMenuItemService.getEstablishmentMenuItems(parent._id);
+export const BusinessResolvers = {
+	Business: {
+		menu: async (parent: BusinessDocument) => {
+			let menuItems: MenuItemDocument[] = await MongoDBMenuItemService.getBusinessMenuItems(parent._id);
 			let menu: MenuSectionDocument[] = parent.sections.map(section => ({
 				id: section.id,
 				name: section.name,

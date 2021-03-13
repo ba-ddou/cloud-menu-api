@@ -12,9 +12,9 @@ const MenuItemSchema = new Schema({
         uri: String
     },
     section: String,
-    establishment: {
+    business: {
         type: String,
-        ref: 'Establishment'
+        ref: 'Business'
     }
 }, {
     collection: 'MenuItem'
