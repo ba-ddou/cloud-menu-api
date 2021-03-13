@@ -1,5 +1,5 @@
 import { Business, BusinessResolvers } from './types/Business';
-import { BusinessDocument } from 'cloud-menu-shared-libs/@types/Business'
+import { BusinessDocument } from 'cloud-menu-shared-libs'
 import { MenuItem } from './types/MenuItem'
 import { MenuSection } from './types/MenuSection'
 

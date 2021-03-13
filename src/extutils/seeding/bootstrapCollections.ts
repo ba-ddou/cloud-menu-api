@@ -1,8 +1,8 @@
 
 
 import * as cities from './cities.json'
-import { BusinessDocument } from 'cloud-menu-shared-libs/@types/Business'
-import { MenuItem as MenuItemDocument } from 'cloud-menu-shared-libs/@types/MenuItem'
+import { BusinessDocument } from 'cloud-menu-shared-libs'
+import { MenuItem as MenuItemDocument } from 'cloud-menu-shared-libs'
 import { readFile, writeFile } from 'jsonfile'
 import * as pify from 'pify';
 import * as path from 'path';

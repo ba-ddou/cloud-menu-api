@@ -1689,7 +1689,7 @@ clone-response@^1.0.2:
 
 "cloud-menu-shared-libs@https://github.com/ba-ddou/cloud-menu-shared-libs":
   version "1.0.0"
-  resolved "https://github.com/ba-ddou/cloud-menu-shared-libs#5f56c130833d112e090e98fd90e6dfa9d856ce88"
+  resolved "https://github.com/ba-ddou/cloud-menu-shared-libs#dae0fcf6ae52ab4662858ee0ce31b00c218e8c90"
 
 color-convert@^1.9.0:
   version "1.9.3"

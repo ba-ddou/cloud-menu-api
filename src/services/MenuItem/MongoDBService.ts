@@ -1,4 +1,4 @@
-import { MenuItem as MenuItemDocument } from 'cloud-menu-shared-libs/@types/MenuItem'
+import { MenuItem as MenuItemDocument } from 'cloud-menu-shared-libs'
 import MenuItemModel from '../../models/MenuItem'
 export default class MongoDBService {
     getMenuItem(id: string) {

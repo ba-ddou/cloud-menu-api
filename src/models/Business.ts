@@ -1,5 +1,5 @@
 import { Schema, Document, model } from 'mongoose';
-import { BusinessDocument } from 'cloud-menu-shared-libs/@types/Business'
+import { BusinessDocument } from 'cloud-menu-shared-libs'
 
 const sectionSchema = new Schema({
     id: {
