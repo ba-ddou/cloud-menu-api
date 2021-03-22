@@ -32,12 +32,12 @@ export const parseBusinessRawData = (data: rawBusinessData, city: string): [Busi
             _type: 'restaurant',
             address: data.address,
             banner: {
-                uri: ''
+                uri: data.img.path
             },
             city,
             name: data.name,
             sections,
-            description: '',
+            description: 'Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression',
             email: '',
             location: {
                 latitude: parseFloat(data.location.lat),
