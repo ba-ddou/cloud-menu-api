@@ -1,8 +1,15 @@
 import schema from './schema'
 import { ApolloServer } from 'apollo-server'
 import * as mongoose from 'mongoose'
+import { config } from 'dotenv'
+config();
+const {
+    PORT,
+    LOCAL_DB,
+    ATLAS_DB
+} = process.env;
 
-mongoose.connect('mongodb://localhost:27017/cloudMenuDb', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(ATLAS_DB, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const server = new ApolloServer({
     schema,
@@ -11,6 +18,6 @@ const server = new ApolloServer({
 });
 
 
-server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+server.listen({ port: PORT || 4000 }).then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
 });

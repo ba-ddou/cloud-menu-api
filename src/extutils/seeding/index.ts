@@ -1,11 +1,12 @@
 import { Seeder } from 'mongo-seeding';
 import * as path from 'path';
-
+import { config } from 'dotenv'
+config();
 
 async function run() {
     const seeder = new Seeder({
-        database: 'mongodb://localhost:27017/cloudMenuDb',
-        dropDatabase: true,
+        database: process.env.ATLAS_DB,
+        // dropDatabase: true,
         dropCollections: true,
     });
     const collections = seeder.readCollectionsFromPath(
