@@ -1,11 +1,12 @@
 {
 	"compilerOptions": {
-		"target": "ESNext",
-		"watch": true,
+		"target": "es5",
+		// "watch": true,
 		"moduleResolution": "node",
+		"rootDir": "src",
 		"outDir": "build",
 		"resolveJsonModule": true,
-		"allowJs": true,
+		"allowJs": true
 	},
 	"include": ["src", "@types"]
 }
