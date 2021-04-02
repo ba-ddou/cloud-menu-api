@@ -13,6 +13,7 @@ import { MongoDBBusinessService } from './services/Business'
 const Query = gql`
     type Query {
         business(id: String): Business
+        businesses: [Business]
     }
 `
 
@@ -23,6 +24,10 @@ const rootResolvers = {
         }) => {
             let business = await MongoDBBusinessService.getBusiness(args.id);
             return business;
+        },
+        businesses: async () => {
+            let businesses = await MongoDBBusinessService.getAllBusinesses();
+            return businesses;
         }
     }
 }

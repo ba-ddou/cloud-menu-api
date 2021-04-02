@@ -5,4 +5,8 @@ export default class MongoDBService {
         let document = await BusinessModel.findById(id);
         if (document) return document;
     }
+    async getAllBusinesses(): Promise<BusinessDocument[] | null> {
+        let documents = await BusinessModel.find();
+        if (documents && documents.length > 0) return documents;
+    }
 }
