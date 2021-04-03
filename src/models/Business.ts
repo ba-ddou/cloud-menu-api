@@ -39,8 +39,10 @@ const BusinessSchema = new Schema({
         longitude: Number
     },
     sections: [sectionSchema],
-    username: String,
-    passwordHash: String
+    owner:{
+        type: String,
+        ref: 'Owner'
+    }
     ,
 }, {
     collection: 'Business'

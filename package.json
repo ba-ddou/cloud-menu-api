@@ -26,7 +26,6 @@
     "serve": "node build",
     "bootstrapCollections": "npx ts-node src/extutils/seeding/bootstrapCollections.ts",
     "seedDb": "npx ts-node src/extutils/seeding/index.ts"
-    
   },
   "devDependencies": {
     "@types/jsonfile": "^6.0.0"
