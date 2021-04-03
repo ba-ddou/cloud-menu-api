@@ -8,6 +8,7 @@
     "@types/pify": "^5.0.0",
     "apollo-server": "^2.21.0",
     "cloud-menu-shared-libs": "https://github.com/ba-ddou/cloud-menu-shared-libs",
+    "command-line-args": "^5.1.1",
     "dotenv": "^8.2.0",
     "graphql": "^15.5.0",
     "graphql-tools": "^7.0.4",
@@ -25,9 +26,11 @@
     "build": "tsc",
     "serve": "node build",
     "bootstrapCollections": "npx ts-node src/extutils/seeding/bootstrapCollections.ts",
-    "seedDb": "npx ts-node src/extutils/seeding/index.ts"
+    "seedDb": "npx ts-node src/extutils/seeding/index.ts",
+    "owner:crud": "npx ts-node src/extutils/ownerCRUD/index.ts"
   },
   "devDependencies": {
+    "@types/command-line-args": "^5.0.0",
     "@types/jsonfile": "^6.0.0"
   }
 }
