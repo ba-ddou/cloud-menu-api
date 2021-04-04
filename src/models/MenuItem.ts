@@ -20,7 +20,9 @@ const MenuItemSchema = new Schema({
     collection: 'MenuItem'
 });
 
-interface MongooseMenuItemDocument extends Document, Omit<MenuItemDocument, '_id'> { }
+interface MongooseMenuItemDocument extends Document, Omit<MenuItemDocument, '_id'> {
+    _id: MenuItemDocument['_id']
+}
 
 const MenuItemModel = model<MongooseMenuItemDocument>('MenuItem', MenuItemSchema);
 
