@@ -5,7 +5,7 @@ export interface OwnerDocument extends Omit<Owner, 'id'> {
     hashedPassword: string
 }
 
-export interface OwnerCreate extends Omit<Owner, '_id' | 'businesses'> {
+export interface OwnerCreate extends Omit<Owner, 'id' | 'businesses'> {
     password: string
 }
 
@@ -23,11 +23,21 @@ export class OwnerEntity implements Omit<Owner, '_id'> {
         email,
         phone,
         businesses
-    }:OwnerDocument) {
+    }: OwnerDocument) {
         this.id = _id;
         this.name = name;
         this.email = email;
         this.businesses = businesses;
+    }
+
+
+    static assertCreatePayload({
+        name,
+        email,
+        phone,
+        password
+    }: OwnerCreate) {
+        return name && email && phone && password
     }
 
 }

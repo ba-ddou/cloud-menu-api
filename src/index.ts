@@ -1,15 +1,13 @@
 import schema from './schema'
 import { ApolloServer } from 'apollo-server'
-import * as mongoose from 'mongoose'
 import { config } from 'dotenv'
+import { connect } from './mongooseConnection'
 config();
 const {
     PORT,
-    LOCAL_DB,
-    ATLAS_DB
 } = process.env;
 
-mongoose.connect(ATLAS_DB, {useNewUrlParser: true, useUnifiedTopology: true});
+connect();
 
 const server = new ApolloServer({
     schema,

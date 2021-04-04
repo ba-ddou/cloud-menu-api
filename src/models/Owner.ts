@@ -1,8 +1,11 @@
 import { Schema, Document, model } from 'mongoose';
 import { OwnerDocument } from '../entities/Owner'
+import { v4 as uuidv4 } from 'uuid';
 const OwnerSchema = new Schema({
     _id: {
-        type: String
+        type: String,
+        unique: true,
+        default: uuidv4
     },
     name: {
         type: String
