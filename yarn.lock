@@ -1854,7 +1854,7 @@ clone-response@^1.0.2:
 
 "cloud-menu-shared-libs@https://github.com/ba-ddou/cloud-menu-shared-libs":
   version "1.0.0"
-  resolved "https://github.com/ba-ddou/cloud-menu-shared-libs#03f43078e0a8b5d8ef59b4b99a2ee848b1215446"
+  resolved "https://github.com/ba-ddou/cloud-menu-shared-libs#74a2d6c80da3c6b6ad7b2da484af80640d9adf1d"
   dependencies:
     "@apollo/client" "^3.3.12"
     "@apollo/react-hooks" "^4.0.0"

@@ -1,5 +1,5 @@
 import { Schema, Document, model } from 'mongoose';
-import { OwnerDocument } from 'cloud-menu-shared-libs'
+import { OwnerDocument } from '../entities/Owner'
 const OwnerSchema = new Schema({
     _id: {
         type: String
