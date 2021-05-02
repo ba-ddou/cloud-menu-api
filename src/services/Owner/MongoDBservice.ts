@@ -35,7 +35,7 @@ export default class MongoDBService {
             });
             return token;
 
-        }
+        } else return 'password is incorrect'
 
 
     }
