@@ -9,6 +9,7 @@ export default class MongoDBService {
         let documents = await MenuItemModel.find({
             business
         });
+        //@ts-ignore
         if (documents) return documents;
     }
 }
