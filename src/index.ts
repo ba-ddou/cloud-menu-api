@@ -4,6 +4,7 @@ import { config } from 'dotenv'
 import { connect } from './mongooseConnection'
 import authentication from './middlewares/authentication'
 import * as express from 'express'
+import * as cookieParser from 'cookie-parser'
 
 config();
 const {
@@ -21,16 +22,17 @@ const server = new ApolloServer({
         }
     },
     context: ({ req, res }) => {
-        console.log({
-            authToken: req.cookies['authToken']
-        })
-        return { req, res }
+        const { user } = req;
+        console.log("🚀 ~ file: index.ts ~ line 26 ~ user", user);
+        return { user, req, res }
     }
 });
 const app = express();
+app.use(cookieParser());
+app.use(authentication);
 server.applyMiddleware({ app });
 
-app.listen({ port: PORT || 4000 },()=>{
+app.listen({ port: PORT || 4000 }, () => {
     console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
 });
 

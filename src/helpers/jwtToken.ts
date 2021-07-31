@@ -11,8 +11,14 @@ export function getAuthToken(payload: {
 }
 
 export function verifyAuthToken(token: string): {
-    id: string
+    id: string | null
 } {
-    let payload = jwt.verify(token, JWT_PRIVATE_KEY);
-    return payload;
+    try {
+        var payload = jwt.verify(token, JWT_PRIVATE_KEY);
+        return payload;
+    } catch (e) {
+        return {
+            id: null
+        };
+    }
 }
