@@ -1,4 +1,4 @@
-import { BusinessDocument } from 'cloud-menu-shared-libs'
+import { BusinessDocument } from '@cloudmenu/cloud-menu-shared-libs'
 import BusinessModel from '../../models/Business'
 export default class MongoDBService {
     async getBusiness(id: string): Promise<BusinessDocument | null> {

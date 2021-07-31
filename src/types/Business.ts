@@ -1,8 +1,8 @@
 import { gql } from 'apollo-server'
 import { MenuSection, MenuSectionDocument } from './MenuSection'
-import { MenuItem as MenuItemDocument } from 'cloud-menu-shared-libs'
+import { MenuItem as MenuItemDocument } from '@cloudmenu/cloud-menu-shared-libs'
 import { MongoDBMenuItemService } from '../services/MenuItem'
-import { BusinessDocument } from 'cloud-menu-shared-libs'
+import { BusinessDocument } from '@cloudmenu/cloud-menu-shared-libs'
 
 
 

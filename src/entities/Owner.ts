@@ -1,4 +1,4 @@
-import { Owner } from 'cloud-menu-shared-libs'
+import { Owner } from '@cloudmenu/cloud-menu-shared-libs'
 
 export interface OwnerDocument extends Omit<Owner, 'id'> {
     _id: string

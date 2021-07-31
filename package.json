@@ -5,9 +5,9 @@
   "author": "abdelbassite badou",
   "license": "MIT",
   "dependencies": {
+    "@cloudmenu/cloud-menu-shared-libs": "^0.0.1",
     "@types/pify": "^5.0.0",
     "apollo-server": "^2.21.0",
-    "cloud-menu-shared-libs": "https://github.com/ba-ddou/cloud-menu-shared-libs",
     "command-line-args": "^5.1.1",
     "dotenv": "^8.2.0",
     "graphql": "^15.5.0",

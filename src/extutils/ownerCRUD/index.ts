@@ -1,6 +1,6 @@
 
 import * as commandLineArgs from 'command-line-args'
-import { Owner } from 'cloud-menu-shared-libs'
+import { Owner } from '@cloudmenu/cloud-menu-shared-libs'
 import { readFile } from 'jsonfile'
 import * as pify from 'pify';
 import * as path from 'path';
