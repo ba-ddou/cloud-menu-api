@@ -5,6 +5,7 @@ import { MenuSection } from './types/MenuSection'
 
 import { gql } from 'apollo-server'
 import { makeExecutableSchema } from 'graphql-tools'
+import { ExpressContext } from 'apollo-server-express'
 
 import { MongoDBBusinessService } from './services/Business'
 import { MongoDBOwnerService } from './services/Owner'
@@ -37,12 +38,15 @@ const rootResolvers = {
         ownerLogin: async (_, args: {
             email: string,
             password: string
-        }) => {
-            let authToken = MongoDBOwnerService.login({
+        }, context: ExpressContext) => {
+            let { authToken, error } = await MongoDBOwnerService.login({
                 email: args.email,
                 password: args.password
             });
-            return authToken;
+            if (authToken) {
+                context.res.setHeader('Set-Cookie', [`authToken=${authToken}`]);
+                return 'login successful'
+            } else return error;
         },
     }
 }

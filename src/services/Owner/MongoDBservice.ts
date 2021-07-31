@@ -23,19 +23,31 @@ export default class MongoDBService {
     }: {
         email: string,
         password: string
-    }) {
+    }): Promise<{
+        authToken: string | null,
+        error: string | null
+    }> {
         let owner = await OwnerModel.findOne({
             email
         });
-        if (!owner) return 'owner not found'
+        if (!owner) return {
+            authToken: null,
+            error: 'owner not found'
+        }
         let passwordIsCorrect = await assertPassword(password, owner.hashedPassword);
         if (passwordIsCorrect) {
-            let token = getAuthToken({
+            let authToken = getAuthToken({
                 id: owner._id
             });
-            return token;
+            return {
+                authToken,
+                error: null
+            };
 
-        } else return 'password is incorrect'
+        } else return {
+            authToken: null,
+            error: 'password is incorrect'
+        }
 
 
     }
