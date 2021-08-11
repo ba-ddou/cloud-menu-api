@@ -3,12 +3,13 @@ import { BusinessDocument } from '@cloudmenu/cloud-menu-shared-libs'
 import { MenuItem } from './types/MenuItem'
 import { MenuSection } from './types/MenuSection'
 
-import { gql } from 'apollo-server'
+import { gql, UserInputError } from 'apollo-server'
 import { makeExecutableSchema } from 'graphql-tools'
 import { ExpressContext } from 'apollo-server-express'
 
 import { MongoDBBusinessService } from './services/Business'
 import { MongoDBOwnerService } from './services/Owner'
+import { GenericHttpResponse } from './types/http'
 
 
 const Query = gql`
@@ -43,10 +44,20 @@ const rootResolvers = {
                 email: args.email,
                 password: args.password
             });
+            // let res: GenericHttpResponse<string>;
             if (authToken) {
                 context.res.setHeader('Set-Cookie', [`authToken=${authToken}`]);
+                // res = {
+                //     status: 200,
+                //     body: {
+                //         error: null,
+                //         data: 'login successful'
+                //     }
+                // }
                 return 'login successful'
-            } else return error;
+            } else throw new UserInputError(error);
+
+
         },
     }
 }
