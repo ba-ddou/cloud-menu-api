@@ -2,7 +2,7 @@ import { Business, BusinessResolvers } from './types/Business';
 import { BusinessDocument } from '@cloudmenu/cloud-menu-shared-libs'
 import { MenuItem } from './types/MenuItem'
 import { MenuSection } from './types/MenuSection'
-
+import { Owner } from './types/Owner'
 import { gql, UserInputError } from 'apollo-server'
 import { makeExecutableSchema } from 'graphql-tools'
 import { ExpressContext } from 'apollo-server-express'
@@ -18,7 +18,7 @@ const Query = gql`
         businesses: [Business]
     }
     type Mutation {
-        ownerLogin(email:String,password:String): String
+        ownerLogin(email:String,password:String): Owner
     }
 `
 
@@ -40,7 +40,7 @@ const rootResolvers = {
             email: string,
             password: string
         }, context: ExpressContext) => {
-            let { authToken, error } = await MongoDBOwnerService.login({
+            let { authToken, error, owner } = await MongoDBOwnerService.login({
                 email: args.email,
                 password: args.password
             });
@@ -54,7 +54,8 @@ const rootResolvers = {
                 //         data: 'login successful'
                 //     }
                 // }
-                return 'login successful'
+                console.log({owner});
+                return owner;
             } else throw new UserInputError(error);
 
 
@@ -63,7 +64,7 @@ const rootResolvers = {
 }
 
 export default makeExecutableSchema({
-    typeDefs: [Query, Business, MenuItem, MenuSection],
+    typeDefs: [Query, Business, MenuItem, MenuSection, Owner],
     resolvers: {
         ...rootResolvers,
         ...BusinessResolvers

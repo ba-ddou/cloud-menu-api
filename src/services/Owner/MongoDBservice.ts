@@ -2,6 +2,8 @@ import { OwnerDocument, OwnerCreate, OwnerEntity } from '../../entities/Owner'
 import OwnerModel from '../../models/Owner'
 import { hashNSalt, assertPassword } from '../../helpers/pswdEncryption'
 import { getAuthToken } from '../../helpers/jwtToken'
+import { Owner } from '@cloudmenu/cloud-menu-shared-libs'
+
 export default class MongoDBService {
 
     async createOwner(owner: OwnerCreate) {
@@ -17,6 +19,12 @@ export default class MongoDBService {
         ownerDocument.save();
     }
 
+    // async getOwner(id: string) {
+    //     return OwnerModel.findOne({
+    //         _id: id
+    //     });
+    // }
+
     async login({
         email,
         password
@@ -25,6 +33,7 @@ export default class MongoDBService {
         password: string
     }): Promise<{
         authToken: string | null,
+        owner: Owner | null,
         error: string | null
     }> {
         let owner = await OwnerModel.findOne({
@@ -32,6 +41,7 @@ export default class MongoDBService {
         });
         if (!owner) return {
             authToken: null,
+            owner: null,
             error: 'owner not found'
         }
         let passwordIsCorrect = await assertPassword(password, owner.hashedPassword);
@@ -41,11 +51,14 @@ export default class MongoDBService {
             });
             return {
                 authToken,
+                //@ts-ignore
+                owner,
                 error: null
             };
 
         } else return {
             authToken: null,
+            owner: null,
             error: 'password is incorrect'
         }
 
