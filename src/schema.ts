@@ -3,7 +3,7 @@ import { BusinessDocument } from '@cloudmenu/cloud-menu-shared-libs'
 import { MenuItem } from './types/MenuItem'
 import { MenuSection } from './types/MenuSection'
 import { Owner } from './types/Owner'
-import { gql, UserInputError } from 'apollo-server'
+import { gql, UserInputError, ForbiddenError } from 'apollo-server'
 import { makeExecutableSchema } from 'graphql-tools'
 import { ExpressContext } from 'apollo-server-express'
 
@@ -16,6 +16,7 @@ const Query = gql`
     type Query {
         business(id: String): Business
         businesses: [Business]
+        ownerData: Owner
     }
     type Mutation {
         ownerLogin(email:String,password:String): Owner
@@ -33,6 +34,15 @@ const rootResolvers = {
         businesses: async () => {
             let businesses = await MongoDBBusinessService.getAllBusinesses();
             return businesses;
+        },
+        ownerData: async (_, args, context: ExpressContext) => {
+            //@ts-ignore
+            if (context.user?.role === 'owner') {
+                //@ts-ignore
+                let owner = await MongoDBOwnerService.getOwner(context.user?.id);
+                return owner;
+            } else throw new ForbiddenError('No owner is logged in');
+
         }
     },
     Mutation: {
@@ -54,7 +64,7 @@ const rootResolvers = {
                 //         data: 'login successful'
                 //     }
                 // }
-                console.log({owner});
+                console.log({ owner });
                 return owner;
             } else throw new UserInputError(error);
 

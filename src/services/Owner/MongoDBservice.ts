@@ -19,11 +19,11 @@ export default class MongoDBService {
         ownerDocument.save();
     }
 
-    // async getOwner(id: string) {
-    //     return OwnerModel.findOne({
-    //         _id: id
-    //     });
-    // }
+    async getOwner(id: string) {
+        return OwnerModel.findOne({
+            _id: id
+        });
+    }
 
     async login({
         email,
