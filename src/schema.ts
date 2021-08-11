@@ -2,7 +2,7 @@ import { Business, BusinessResolvers } from './types/Business';
 import { BusinessDocument } from '@cloudmenu/cloud-menu-shared-libs'
 import { MenuItem } from './types/MenuItem'
 import { MenuSection } from './types/MenuSection'
-import { Owner } from './types/Owner'
+import { Owner,OwnerResolvers } from './types/Owner'
 import { gql, UserInputError, ForbiddenError } from 'apollo-server'
 import { makeExecutableSchema } from 'graphql-tools'
 import { ExpressContext } from 'apollo-server-express'
@@ -77,6 +77,7 @@ export default makeExecutableSchema({
     typeDefs: [Query, Business, MenuItem, MenuSection, Owner],
     resolvers: {
         ...rootResolvers,
-        ...BusinessResolvers
+        ...BusinessResolvers,
+        ...OwnerResolvers
     }
 })

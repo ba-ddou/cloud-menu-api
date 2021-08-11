@@ -23,7 +23,7 @@ const server = new ApolloServer({
     },
     context: ({ req, res }) => {
         const { user } = req;
-        console.log("🚀 ~ file: index.ts ~ line 26 ~ user", user);
+        // console.log("🚀 ~ file: index.ts ~ line 26 ~ user", user);
         return { user, req, res }
     }
 });
