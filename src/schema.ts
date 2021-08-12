@@ -11,7 +11,14 @@ import { MongoDBBusinessService } from './services/Business'
 import { MongoDBOwnerService } from './services/Owner'
 import { MongoDBMenuItemService } from './services/MenuItem'
 import { GenericHttpResponse } from './types/http'
+import { allowFor, allowOnlyOwnBusinesses } from './middlewares/accessControl'
 
+interface CloudMenuAPIContext extends ExpressContext {
+    user?: {
+        id: string,
+        role: 'guest' | 'owner'
+    }
+}
 
 const Query = gql`
     type Query {
@@ -73,8 +80,13 @@ const rootResolvers = {
 
 
         },
-        createMenuItem: async (_, args: { menuItem: MenuItemDocument }, context: ExpressContext) => {
+        createMenuItem: async (_, args: { menuItem: MenuItemDocument }, context: CloudMenuAPIContext) => {
             let { menuItem } = args;
+            await allowOnlyOwnBusinesses({
+                role: context.user?.role,
+                userId: context.user?.id,
+                businessId: menuItem.business
+            });
             console.log("🚀 ~ file: schema.ts ~ line 78 ~ createMenuItem: ~ menuItem", menuItem);
             let { error, document } = await MongoDBMenuItemService.createMenuItem(menuItem);
             return document

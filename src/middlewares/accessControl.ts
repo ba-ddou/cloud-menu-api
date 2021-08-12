@@ -6,9 +6,8 @@ type UserRole = 'guest' | 'owner';
 
 interface AccessControlContext {
     role?: UserRole,
-    id?: string,
-    businessId?: string,
-    menuItemId?: string
+    userId?: string,
+    businessId?: string
 }
 
 export const allowFor = (context: AccessControlContext, roles: UserRole[]) => {
@@ -17,13 +16,13 @@ export const allowFor = (context: AccessControlContext, roles: UserRole[]) => {
 }
 
 export const allowOnlyOwnBusinesses = async (context: AccessControlContext) => {
-    if (context?.role != 'owner') throw new ForbiddenError('You are not a business owner');
+    if (context.role != 'owner') throw new ForbiddenError('You are not a business owner');
     if(context.businessId){
-        let owner = await MongoDBOwnerService.getOwner(context.id);
+        let owner = await MongoDBOwnerService.getOwner(context.userId);
         if(owner.businesses && owner.businesses.includes(context.businessId)){
             return;
         } else {
-            throw new ForbiddenError('Only the owner of this business has write permissions.');
+            throw new ForbiddenError('You do not own this business');
         }
     }
     
