@@ -7,6 +7,7 @@ ENV PORT 8080
 COPY package*.json ./
 
 RUN yarn install --only=production
+RUN yarn add @cloudmenu/cloud-menu-shared-libs
 
 COPY . .
 
