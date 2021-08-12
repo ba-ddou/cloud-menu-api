@@ -10,6 +10,9 @@ export const Business = gql`
 	type Image{
 		uri: String
 	}
+	input ImageInput {
+		uri: String
+	}
 	type Section{
 		id: String
 		name: String

@@ -1,5 +1,6 @@
 import { MenuItem as MenuItemDocument } from '@cloudmenu/cloud-menu-shared-libs'
 import MenuItemModel from '../../models/MenuItem'
+import { UserInputError, ValidationError } from 'apollo-server'
 export default class MongoDBService {
     getMenuItem(id: string) {
         return {}
@@ -9,7 +10,20 @@ export default class MongoDBService {
         document: MenuItemDocument,
         error: string
     }> {
+        // TODO: Implement cleaner input payload validation
+        if (
+            !menuItem.name ||
+            !menuItem.thumbnail ||
+            !menuItem.thumbnail.uri ||
+            !menuItem.description ||
+            !menuItem.price ||
+            !menuItem.section ||
+            !menuItem.business
+        ) throw new ValidationError('Invalid menu item shape');
+        // TODO: make sure the section exists on the target restaurant
         let document = await MenuItemModel.create(menuItem);
+
+
         //@ts-ignore
         return { document, error: null };
     }

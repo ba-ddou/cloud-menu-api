@@ -21,7 +21,7 @@ const Query = gql`
     }
     type Mutation {
         ownerLogin(email:String,password:String): Owner
-        createMenuItem(menuItem: MenuItem): MenuItem
+        createMenuItem(menuItem: MenuItemInput): MenuItem
 
     }
 `
@@ -73,9 +73,12 @@ const rootResolvers = {
 
 
         },
-        createMenuItem: async (_, args: MenuItemDocument, context: ExpressContext) => {
-            let { error, document } = await MongoDBMenuItemService.createMenuItem(args);
+        createMenuItem: async (_, args: { menuItem: MenuItemDocument }, context: ExpressContext) => {
+            let { menuItem } = args;
+            console.log("🚀 ~ file: schema.ts ~ line 78 ~ createMenuItem: ~ menuItem", menuItem);
+            let { error, document } = await MongoDBMenuItemService.createMenuItem(menuItem);
             return document
+            // return menuItem;
         }
     }
 }
