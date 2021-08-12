@@ -5,6 +5,15 @@ export default class MongoDBService {
         return {}
     }
 
+    async createMenuItem(menuItem: MenuItemDocument): Promise<{
+        document: MenuItemDocument,
+        error: string
+    }> {
+        let document = await MenuItemModel.create(menuItem);
+        //@ts-ignore
+        return { document, error: null };
+    }
+
     async getBusinessMenuItems(business: string): Promise<MenuItemDocument[]> {
         let documents = await MenuItemModel.find({
             business

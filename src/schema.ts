@@ -1,14 +1,15 @@
 import { Business, BusinessResolvers } from './types/Business';
-import { BusinessDocument } from '@cloudmenu/cloud-menu-shared-libs'
+import { BusinessDocument, MenuItem as MenuItemDocument } from '@cloudmenu/cloud-menu-shared-libs'
 import { MenuItem } from './types/MenuItem'
 import { MenuSection } from './types/MenuSection'
-import { Owner,OwnerResolvers } from './types/Owner'
+import { Owner, OwnerResolvers } from './types/Owner'
 import { gql, UserInputError, ForbiddenError } from 'apollo-server'
 import { makeExecutableSchema } from 'graphql-tools'
 import { ExpressContext } from 'apollo-server-express'
 
 import { MongoDBBusinessService } from './services/Business'
 import { MongoDBOwnerService } from './services/Owner'
+import { MongoDBMenuItemService } from './services/MenuItem'
 import { GenericHttpResponse } from './types/http'
 
 
@@ -20,6 +21,8 @@ const Query = gql`
     }
     type Mutation {
         ownerLogin(email:String,password:String): Owner
+        createMenuItem(menuItem: MenuItem): MenuItem
+
     }
 `
 
@@ -70,6 +73,10 @@ const rootResolvers = {
 
 
         },
+        createMenuItem: async (_, args: MenuItemDocument, context: ExpressContext) => {
+            let { error, document } = await MongoDBMenuItemService.createMenuItem(args);
+            return document
+        }
     }
 }
 
