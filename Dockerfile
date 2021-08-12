@@ -5,9 +5,9 @@ WORKDIR /usr/src/app
 ENV PORT 8080
 
 COPY package*.json ./
+COPY .npmrc  ./
 
 RUN yarn install --only=production
-RUN yarn add @cloudmenu/cloud-menu-shared-libs
 
 COPY . .
 
