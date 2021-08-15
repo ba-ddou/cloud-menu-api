@@ -19,6 +19,7 @@ docker-build:
   before_script:
     - touch .env
     - echo ATLAS_DB=${ATLAS_DB} >  .env
+    - echo PORT=8080 >> .env
 
     # - mkdir gcloud-build && cd gcloud-build
     # - wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-189.0.0-linux-x86_64.tar.gz;
