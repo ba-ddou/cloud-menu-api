@@ -12,7 +12,7 @@
 
 docker-build:
   # Use the official docker image.
-  image: docker:latest
+  image: google/cloud-sdk
   stage: build
   services:
     - docker:dind
@@ -36,6 +36,7 @@ docker-build:
     - echo $GCP_SERVICE_KEY > gcloud-service-key.json
     - gcloud auth activate-service-account --key-file gcloud-service-key.json
     - gcloud config set project $GCP_PROJECT_ID
+    - gcloud auth configure-docker
     - tag="gcr.io/${GCP_PROJECT_ID}/cloud-menu-api"
     - docker build --pull -t "${tag}" .
     - docker push "${tag}"
