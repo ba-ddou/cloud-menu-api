@@ -12,7 +12,7 @@
 
 docker-build:
   # Use the official docker image.
-  image: google/cloud-sdk
+  image: docker:latest
   stage: build
   services:
     - docker:dind
@@ -31,8 +31,11 @@ docker-build:
     #     tag=":$CI_COMMIT_REF_SLUG"
     #     echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
     #   fi
-
-
+    - curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-352.0.0-linux-x86_64.tar.gz
+    - tar -xzf google-cloud-sdk-352.0.0-linux-x86_64.tar.gz
+    - ./google-cloud-sdk/install.sh
+    - export PATH=$PATH:/usr/local/google-cloud-sdk/bin
+    - gcloud init
     - echo $GCP_SERVICE_KEY > gcloud-service-key.json
     - gcloud auth activate-service-account --key-file gcloud-service-key.json
     - gcloud config set project $GCP_PROJECT_ID
