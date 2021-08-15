@@ -12,6 +12,16 @@ import { MongoDBOwnerService } from './services/Owner'
 import { MongoDBMenuItemService } from './services/MenuItem'
 import { GenericHttpResponse } from './types/http'
 import { allowFor, allowOnlyOwnBusinesses } from './middlewares/accessControl'
+import { config } from 'dotenv'
+
+config();
+
+const {
+    BRANCH_NAME,
+    COMMIT_HASH,
+    PIPELINE_ID,
+    DEPLOYMENT_DATE,
+} = process.env;
 
 interface CloudMenuAPIContext extends ExpressContext {
     user?: {
@@ -21,10 +31,17 @@ interface CloudMenuAPIContext extends ExpressContext {
 }
 
 const Query = gql`
+    type APIMetaData {
+        BRANCH_NAME: String
+        COMMIT_HASH: String
+        PIPELINE_ID: String
+        DEPLOYMENT_DATE: String
+    }
     type Query {
         business(id: String): Business
         businesses: [Business]
         ownerData: Owner
+        apiMetaData: APIMetaData
     }
     type Mutation {
         ownerLogin(email:String,password:String): Owner
@@ -53,6 +70,14 @@ const rootResolvers = {
                 return owner;
             } else throw new ForbiddenError('No owner is logged in');
 
+        },
+        apiMetaData: async (_, args, context: ExpressContext) => {
+            return {
+                BRANCH_NAME,
+                COMMIT_HASH,
+                PIPELINE_ID,
+                DEPLOYMENT_DATE,
+            }
         }
     },
     Mutation: {

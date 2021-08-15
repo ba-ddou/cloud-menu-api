@@ -20,6 +20,10 @@ docker-build:
     - touch .env
     - echo ATLAS_DB=${ATLAS_DB} >  .env
     - echo PORT=8080 >> .env
+    - echo BRANCH_NAME="$CI_COMMIT_REF_NAME" >> .env
+    - echo COMMIT_HASH="$CI_COMMIT_SHA" >> .env
+    - echo PIPELINE_ID="$CI_PIPELINE_ID" >> .env
+    - echo DEPLOYMENT_DATE=$(date) >> .env
 
     # - mkdir gcloud-build && cd gcloud-build
     # - wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-189.0.0-linux-x86_64.tar.gz;
