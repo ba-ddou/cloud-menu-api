@@ -23,20 +23,39 @@ docker-build:
   # Default branch leaves tag empty (= latest tag)
   # All other branches are tagged with the escaped branch name (commit ref slug)
   script:
-    - |
-      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
-        tag=""
-        echo "Running on default branch '$CI_DEFAULT_BRANCH': tag = 'latest'"
-      else
-        tag=":$CI_COMMIT_REF_SLUG"
-        echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
-      fi
-    - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" .
-    - docker push "$CI_REGISTRY_IMAGE${tag}"
+    # - |
+    #   if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
+    #     tag=""
+    #     echo "Running on default branch '$CI_DEFAULT_BRANCH': tag = 'latest'"
+    #   else
+    #     tag=":$CI_COMMIT_REF_SLUG"
+    #     echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
+    #   fi
+
+
+    - echo $GCP_SERVICE_KEY > gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file gcloud-service-key.json
+    - gcloud config set project $GCP_PROJECT_ID
+    - tag="gcr.io/${GCP_PROJECT_ID}/cloud-menu-api"
+    - docker build --pull -t "${tag}" .
+    - docker push "${tag}"
+
+
+    # - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" .
+    # - docker push "$CI_REGISTRY_IMAGE${tag}"
   # Run this job in a branch where a Dockerfile exists
   rules:
     - if: '$CI_COMMIT_REF_NAME == "deployBeta"'
     - if: $CI_COMMIT_BRANCH
       exists:
         - Dockerfile
-    
+
+
+# GCP-registery-deploy:
+#   image: google/cloud-sdk
+#   stage: deploy
+#   script:
+#     - echo $GCP_SERVICE_KEY > gcloud-service-key.json
+#     - gcloud auth activate-service-account --key-file gcloud-service-key.json
+#     - gcloud config set project $GCP_PROJECT_ID
+#     - docker push gcr.io/${GCP_PROJECT_ID}/cloud-menu-api
