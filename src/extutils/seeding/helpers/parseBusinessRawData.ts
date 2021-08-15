@@ -13,6 +13,7 @@ export const parseBusinessRawData = (data: rawBusinessData, city: string): [Busi
         name: section
     }));
     let businessId = alphanumeric();
+    //@ts-ignore
     let menu: MenuItemDocument[] = data.menu.filter(menuItem => menuItem.price && menuItem.name)
         .map(menuItem => ({
             name: menuItem.name,
@@ -50,6 +51,7 @@ export const parseBusinessRawData = (data: rawBusinessData, city: string): [Busi
                 uri: ''
             },
             phone: '',
+            //@ts-ignore
             username: businessId,
             passwordHash: businessId
         },
