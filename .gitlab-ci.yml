@@ -19,7 +19,19 @@ docker-build:
   before_script:
     - touch .env
     - echo ATLAS_DB=${ATLAS_DB} >  .env
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
+
+    - mkdir gcloud-build && cd gcloud-build;
+    - wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-189.0.0-linux-x86_64.tar.gz;
+    - tar -xzf google-cloud-sdk-189.0.0-linux-x86_64.tar.gz
+    - ./google-cloud-sdk/install.sh
+    - source google-cloud-sdk/path.bash.inc && echo "source google-cloud-sdk/path.bash.inc" >> $HOME/.profile
+    - ./google-cloud-sdk/bin/gcloud init
+    - echo $GCP_SERVICE_KEY > gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file gcloud-service-key.json
+    - gcloud config set project $GCP_PROJECT_ID
+    - gcloud auth configure-docker
+    # - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   # Default branch leaves tag empty (= latest tag)
   # All other branches are tagged with the escaped branch name (commit ref slug)
   script:
@@ -31,15 +43,7 @@ docker-build:
     #     tag=":$CI_COMMIT_REF_SLUG"
     #     echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
     #   fi
-    - curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-352.0.0-linux-x86_64.tar.gz
-    - tar -xzf google-cloud-sdk-352.0.0-linux-x86_64.tar.gz
-    - ./google-cloud-sdk/install.sh
-    - export PATH=$PATH:/usr/local/google-cloud-sdk/bin
-    - gcloud init
-    - echo $GCP_SERVICE_KEY > gcloud-service-key.json
-    - gcloud auth activate-service-account --key-file gcloud-service-key.json
-    - gcloud config set project $GCP_PROJECT_ID
-    - gcloud auth configure-docker
+    
     - tag="gcr.io/${GCP_PROJECT_ID}/cloud-menu-api"
     - docker build --pull -t "${tag}" .
     - docker push "${tag}"
