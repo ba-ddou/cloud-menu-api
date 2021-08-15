@@ -9,7 +9,7 @@ COPY .npmrc  ./
 
 RUN yarn install --only=production
 COPY . .
-RUN yarn build
+# RUN yarn build
 
 # RUN npm run build
 

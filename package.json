@@ -27,7 +27,7 @@
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec npx ts-node src/index.ts",
     "build": "tsc --esModuleInterop true",
-    "serve": "node build",
+    "serve": "npx ts-node src/index.ts",
     "bootstrapCollections": "npx ts-node src/extutils/seeding/bootstrapCollections.ts",
     "seedDb": "npx ts-node src/extutils/seeding/index.ts",
     "owner:crud": "npx ts-node src/extutils/ownerCRUD/index.ts"
