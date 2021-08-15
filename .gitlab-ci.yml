@@ -20,17 +20,15 @@ docker-build:
     - touch .env
     - echo ATLAS_DB=${ATLAS_DB} >  .env
 
-    - apt-get install python3.6
-    - mkdir gcloud-build && cd gcloud-build
-    - wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-189.0.0-linux-x86_64.tar.gz;
-    - tar -xzf google-cloud-sdk-189.0.0-linux-x86_64.tar.gz
-    - ./google-cloud-sdk/install.sh
-    - source google-cloud-sdk/path.bash.inc && echo "source google-cloud-sdk/path.bash.inc" >> $HOME/.profile
-    - ./google-cloud-sdk/bin/gcloud init
+    # - mkdir gcloud-build && cd gcloud-build
+    # - wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-189.0.0-linux-x86_64.tar.gz;
+    # - tar -xzf google-cloud-sdk-189.0.0-linux-x86_64.tar.gz
+    # - ./google-cloud-sdk/install.sh
+    # - source google-cloud-sdk/path.bash.inc && echo "source google-cloud-sdk/path.bash.inc" >> $HOME/.profile
+    # - ./google-cloud-sdk/bin/gcloud init
+
     - echo $GCP_SERVICE_KEY > gcloud-service-key.json
-    - gcloud auth activate-service-account --key-file gcloud-service-key.json
-    - gcloud config set project $GCP_PROJECT_ID
-    - gcloud auth configure-docker
+    - docker login -u _json_key -p "$(cat gcloud-service-key.json)"
     # - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   # Default branch leaves tag empty (= latest tag)
   # All other branches are tagged with the escaped branch name (commit ref slug)
