@@ -8,8 +8,8 @@ COPY package*.json ./
 COPY .npmrc  ./
 
 RUN yarn install --only=production
-RUN yarn build
 COPY . .
+RUN yarn build
 
 # RUN npm run build
 
