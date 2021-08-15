@@ -20,8 +20,8 @@ docker-build:
     - touch .env
     - echo ATLAS_DB=${ATLAS_DB} >  .env
 
-
-    - mkdir gcloud-build && cd gcloud-build;
+    - apt-get install python3.6
+    - mkdir gcloud-build && cd gcloud-build
     - wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-189.0.0-linux-x86_64.tar.gz;
     - tar -xzf google-cloud-sdk-189.0.0-linux-x86_64.tar.gz
     - ./google-cloud-sdk/install.sh
