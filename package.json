@@ -6,7 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "@cloudmenu/cloud-menu-shared-libs": "^0.0.1",
-    "@types/pify": "^5.0.0",
     "apollo-server": "^2.21.0",
     "bcrypt": "^5.0.1",
     "command-line-args": "^5.1.1",
@@ -27,14 +26,15 @@
   },
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec npx ts-node src/index.ts",
-    "build": "tsc",
-    "serve": "node build",
+    "build": "tsc --esModuleInterop true",
+    "serve": "npx ts-node src/index.ts",
     "bootstrapCollections": "npx ts-node src/extutils/seeding/bootstrapCollections.ts",
     "seedDb": "npx ts-node src/extutils/seeding/index.ts",
     "owner:crud": "npx ts-node src/extutils/ownerCRUD/index.ts"
   },
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",
-    "@types/jsonfile": "^6.0.0"
+    "@types/jsonfile": "^6.0.0",
+    "@types/pify": "^5.0.0"
   }
 }
