@@ -17,6 +17,10 @@ export const Business = gql`
 		id: String
 		name: String
 	}
+	input SectionInput {
+		businessId: String
+		name: String
+	}
     type Business{
 		_id: String
 		name: String

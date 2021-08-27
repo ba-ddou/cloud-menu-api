@@ -29,6 +29,7 @@ const Query = gql`
     type Mutation {
         ownerLogin(email:String,password:String): Owner
         createMenuItem(menuItem: MenuItemInput): MenuItem
+        createSection(section: SectionInput): Section
 
     }
 `
@@ -64,17 +65,8 @@ const rootResolvers = {
                 email: args.email,
                 password: args.password
             });
-            // let res: GenericHttpResponse<string>;
             if (authToken) {
                 context.res.setHeader('Set-Cookie', [`authToken=${authToken}`]);
-                // res = {
-                //     status: 200,
-                //     body: {
-                //         error: null,
-                //         data: 'login successful'
-                //     }
-                // }
-                console.log({ owner });
                 return owner;
             } else throw new UserInputError(error);
 
@@ -91,6 +83,16 @@ const rootResolvers = {
             let { error, document } = await MongoDBMenuItemService.createMenuItem(menuItem);
             return document
             // return menuItem;
+        },
+        createSection: async (_, args: { section: { businessId: string, name: string } }, context: CloudMenuAPIContext) => {
+            let { section: { businessId, name } } = args;
+            await allowOnlyOwnBusinesses({
+                role: context.user?.role,
+                userId: context.user?.id,
+                businessId
+            });
+            let section = await MongoDBBusinessService.createSection(businessId, name);
+            return section;
         }
     }
 }
