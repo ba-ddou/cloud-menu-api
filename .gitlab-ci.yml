@@ -62,11 +62,14 @@ docker-build:
         - Dockerfile
 
 
-# GCP-registery-deploy:
-#   image: google/cloud-sdk
-#   stage: deploy
-#   script:
-#     - echo $GCP_SERVICE_KEY > gcloud-service-key.json
-#     - gcloud auth activate-service-account --key-file gcloud-service-key.json
-#     - gcloud config set project $GCP_PROJECT_ID
-#     - docker push gcr.io/${GCP_PROJECT_ID}/cloud-menu-api
+deploy:
+  stage: deploy
+  image: google/cloud-sdk
+  services:
+    - docker:dind
+  needs: ["docker-build"]
+  script:
+    - echo $GCP_SERVICE_KEY > gcloud-service-key.json # Google Cloud service accounts
+    - gcloud auth activate-service-account --key-file gcloud-service-key.json
+    - gcloud config set project $GCP_PROJECT_ID
+    - gcloud builds submit . --config=cloudbuild.yml
