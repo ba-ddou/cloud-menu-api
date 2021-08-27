@@ -1,6 +1,7 @@
 import { MenuItem as MenuItemDocument } from '@cloudmenu/cloud-menu-shared-libs'
 import MenuItemModel from '../../models/MenuItem'
 import { UserInputError, ValidationError } from 'apollo-server'
+import { MongoDBBusinessService } from '../Business'
 export default class MongoDBService {
     getMenuItem(id: string) {
         return {}
@@ -20,7 +21,7 @@ export default class MongoDBService {
             !menuItem.section ||
             !menuItem.business
         ) throw new ValidationError('Invalid menu item shape');
-        // TODO: make sure the section exists on the target restaurant
+        await MongoDBBusinessService.assertBusinessAndSection(menuItem.business, menuItem.section);
         let document = await MenuItemModel.create(menuItem);
 
 

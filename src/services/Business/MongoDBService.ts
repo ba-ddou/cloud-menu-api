@@ -33,4 +33,13 @@ export default class MongoDBService {
         return section;
 
     }
+
+    async assertBusinessAndSection(businessId: string, sectionId: string): Promise<BusinessDocument | null> {
+        let document = await BusinessModel.findById(businessId);
+        if (!document)
+            throw new ApolloError(`Business with id ${businessId} does not exist`, '404');
+        if (!document.sections.map(section => section.id).includes(sectionId))
+            throw new ApolloError(`Section with id ${sectionId} does not exist`, '404');
+        return document;
+    }
 }
