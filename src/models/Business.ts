@@ -8,45 +8,50 @@ const sectionSchema = new Schema({
     name: String,
 });
 
-const BusinessSchema = new Schema({
-    _id: {
-        type: String
-    },
-    name: {
-        type: String
-    },
-    _type: {
-        type: String
-    },
-    description: {
-        type: String
-    },
-    banner: {
-        uri: String
-    },
-    thumbnail: {
-        uri: String
-    },
-    logo: {
-        uri: String
-    },
-    email: String,
-    phone: String,
-    city: String,
-    address: String,
-    location: {
-        latitude: Number,
-        longitude: Number
-    },
-    sections: [sectionSchema],
-    owner:{
-        type: String,
-        ref: 'Owner'
-    }
-    ,
-}, {
-    collection: 'Business'
-});
+const BusinessSchema = new Schema(
+	{
+		_id: {
+			type: String,
+		},
+		name: {
+			type: String,
+		},
+		_type: {
+			type: String,
+		},
+		description: {
+			type: String,
+		},
+		banner: {
+			uri: String,
+		},
+		thumbnail: {
+			uri: String,
+		},
+		logo: {
+			uri: String,
+		},
+		email: String,
+		phone: String,
+		city: String,
+		address: String,
+		location: {
+			latitude: Number,
+			longitude: Number,
+		},
+		sections: [sectionSchema],
+		owner: {
+			type: String,
+			ref: "Owner",
+		},
+		metrics: {
+			qrCodeScanCount: Number,
+		},
+	},
+	{
+		collection: "Business",
+	}
+);
 
 interface MongooseBusinessDocument extends Document, Omit<BusinessDocument, '_id'> {
     _id: BusinessDocument['_id']

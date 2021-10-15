@@ -564,19 +564,22 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@cloudmenu/cloud-menu-shared-libs@^0.0.1":
-  version "0.0.1"
-  resolved "https://gitlab.com/api/v4/projects/28521280/packages/npm/@cloudmenu/cloud-menu-shared-libs/-/@cloudmenu/cloud-menu-shared-libs-0.0.1.tgz#7d0b12cae2ec28e049eec6126f70427f4bad0ece"
-  integrity sha1-fQsSyuLsKOBJ7sYSb3BCf0utDs4=
+"@cloudmenu/cloud-menu-shared-libs@0.0.5":
+  version "0.0.5"
+  resolved "https://gitlab.com/api/v4/projects/28521280/packages/npm/@cloudmenu/cloud-menu-shared-libs/-/@cloudmenu/cloud-menu-shared-libs-0.0.5.tgz#ac4b4816fc12121e1f9e2936a38a3d53fa451258"
+  integrity sha1-rEtIFvwSEh4fnik2o4o9U/pFElg=
   dependencies:
     "@apollo/client" "^3.3.12"
     "@apollo/react-hooks" "^4.0.0"
+    "@types/jsonwebtoken" "^8.5.5"
     apollo-boost "^0.4.9"
     graphql "^15.5.0"
+    jsonwebtoken "^8.5.1"
     react "^17.0.1"
     rollup "2.42.1"
     rollup-plugin-jsx "^1.0.3"
     typescript "^4.2.3"
+    url-parse "^1.5.3"
 
 "@graphql-tools/batch-delegate@^7.0.0":
   version "7.0.2"
@@ -1039,6 +1042,13 @@
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@types/jsonfile/-/jsonfile-6.0.0.tgz#264f42991b024fd5ea45eee4186d7ff6a26e9774"
   integrity sha512-mUHbRieyluPtL3c466K7oUGua1lAVlz45PV4U3bHs5CXdBlDIeXJI5xQXa6IZYnrgmcJzJp/CiTZB4zfShAi6w==
+  dependencies:
+    "@types/node" "*"
+
+"@types/jsonwebtoken@^8.5.5":
+  version "8.5.5"
+  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.5.tgz#da5f2f4baee88f052ef3e4db4c1a0afb46cff22c"
+  integrity sha512-OGqtHQ7N5/Ap/TUwO6IgHDuLiAoTmHhGpNvgkCm/F4N6pKzx/RBSfr2OXZSwC6vkfnsEdb6+7DNZVtiXiwdwFw==
   dependencies:
     "@types/node" "*"
 
@@ -4654,6 +4664,14 @@ url-parse@^1.4.3:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.1.tgz#d5fa9890af8a5e1f274a2c98376510f6425f6e3b"
   integrity sha512-HOfCOUJt7iSYzEx/UqgtwKRMC6EU91NFhsCHMv9oM03VJcVo2Qrp8T8kI9D7amFf1cu+/3CEhgb3rF9zL7k85Q==
+  dependencies:
+    querystringify "^2.1.1"
+    requires-port "^1.0.0"
+
+url-parse@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.3.tgz#71c1303d38fb6639ade183c2992c8cc0686df862"
+  integrity sha512-IIORyIQD9rvj0A4CLWsHkBBJuNqWpFQe224b6j9t/ABmquIS0qDU2pY6kl6AuOrL5OkCXHMCFNe1jBcuAggjvQ==
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
