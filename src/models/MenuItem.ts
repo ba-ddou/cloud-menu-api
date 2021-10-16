@@ -15,7 +15,9 @@ const MenuItemSchema = new Schema({
     business: {
         type: String,
         ref: 'Business'
-    }
+    },
+    status: String,
+    inStock: Boolean,
 }, {
     collection: 'MenuItem'
 });

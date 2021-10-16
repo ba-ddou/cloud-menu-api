@@ -564,10 +564,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@cloudmenu/cloud-menu-shared-libs@0.0.5":
-  version "0.0.5"
-  resolved "https://gitlab.com/api/v4/projects/28521280/packages/npm/@cloudmenu/cloud-menu-shared-libs/-/@cloudmenu/cloud-menu-shared-libs-0.0.5.tgz#ac4b4816fc12121e1f9e2936a38a3d53fa451258"
-  integrity sha1-rEtIFvwSEh4fnik2o4o9U/pFElg=
+"@cloudmenu/cloud-menu-shared-libs@0.0.6":
+  version "0.0.6"
+  resolved "https://gitlab.com/api/v4/projects/28521280/packages/npm/@cloudmenu/cloud-menu-shared-libs/-/@cloudmenu/cloud-menu-shared-libs-0.0.6.tgz#29b373f0509c6f86b239b76804296cf2f71c328c"
+  integrity sha1-KbNz8FCcb4ayObdoBCls8vccMow=
   dependencies:
     "@apollo/client" "^3.3.12"
     "@apollo/react-hooks" "^4.0.0"

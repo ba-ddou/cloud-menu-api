@@ -43,8 +43,12 @@ const Query = gql`
 	}
 	type Mutation {
 		ownerLogin(email: String, password: String): Owner
-		createMenuItem(menuItem: MenuItemInput): MenuItem
 		createSection(section: SectionInput): Section
+		createMenuItem(menuItem: MenuItemInput): MenuItem
+		updateMenuItem(
+			id: String
+			menuItemUpdates: MenuItemUpdateInput
+		): MenuItem
 	}
 `;
 
@@ -54,7 +58,7 @@ const rootResolvers = {
 			_,
 			args: {
 				id: string;
-				source?: "QR"
+				source?: "QR";
 			}
 		) => {
 			let business = await MongoDBBusinessService.getBusiness(
@@ -71,8 +75,8 @@ const rootResolvers = {
 			//@ts-ignore
 			if (context.user?.role === "owner") {
 				//@ts-ignore
-                let owner = await MongoDBOwnerService.getOwner(
-                    //@ts-ignore
+				let owner = await MongoDBOwnerService.getOwner(
+					//@ts-ignore
 					context.user?.id
 				);
 				return owner;
@@ -123,6 +127,33 @@ const rootResolvers = {
 			let { error, document } =
 				await MongoDBMenuItemService.createMenuItem(menuItem);
 			return document;
+			// return menuItem;
+		},
+		updateMenuItem: async (
+			_,
+			args: { id: string; menuItemUpdates: MenuItemDocument },
+			context: CloudMenuAPIContext
+		) => {
+			let { id, menuItemUpdates } = args;
+			console.log("🚀 ~ file: schema.ts ~ line 138 ~ args", args);
+			console.log("🚀 ~ file: schema.ts ~ line 138 ~ menuItemUpdates", menuItemUpdates);
+			const { document } = await MongoDBMenuItemService.getMenuItem(id);
+			console.log("🚀 ~ file: schema.ts ~ line 140 ~ document", document);
+			await allowOnlyOwnBusinesses({
+				role: context.user?.role,
+				userId: context.user?.id,
+				businessId: document?.business,
+			});
+			let { error, updatedDocument } =
+				await MongoDBMenuItemService.updateMenuItem(
+					id,
+					menuItemUpdates
+				);
+			console.log(
+				"🚀 ~ file: schema.ts ~ line 146 ~ updatedDocument",
+				updatedDocument
+			);
+			return updatedDocument;
 			// return menuItem;
 		},
 		createSection: async (
